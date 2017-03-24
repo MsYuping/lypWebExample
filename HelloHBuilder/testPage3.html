@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			function class1()
+
+			{
+			
+			   this.name = function(){
+			
+			    alert("class1的方法name()");
+			
+			   }
+			
+			}
+
+		function class2()
+		
+		{
+		
+		 
+		
+		class1.call(this);//要想实现class2继承class1 this就是当前对象class2。
+		
+		}
+		
+		var c2 = new class2();
+		c2.name();
+		</script>
+	</body>
+
+</html>

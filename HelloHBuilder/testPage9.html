@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" value="click" onclick="sendMsg()"/>
+		<script>
+			function sendMsg(){
+				var iframe = document.getElementById("iframe");
+				var win = iframe.contentWindow;
+				win.postMessage("nfdfdfdfdf","*");
+			}
+		</script>
+		<iframe src="a.html" id="iframe"></iframe>
+	</body>
+</html>

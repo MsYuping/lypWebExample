@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>JS高阶函数</title>
+	</head>
+
+	<body>
+		<script>
+			Array.prototype.map = function(func /*, obj */ ) {
+				var len = this.length;
+				//check the argument
+				if(typeof func != "function") {
+					throw new Error("argument should be a function!");
+				}
+				var res = [];
+				var obj = arguments[1];
+				console.log("obj="+obj);
+				for(var i = 0; i < len; i++) {
+					//func.call(), apply the func to this[i]
+					res[i] = func.call(obj, this[i], i, this);
+				}
+				return res;
+			}
+
+			function double(x) {
+				return x * 2;
+			}
+			var mapped = [1, 2, 3, 4, 5].map(double); //return [2, 4, 6, 8, 10]
+			console.log(mapped);
+		</script>
+	</body>
+
+</html>

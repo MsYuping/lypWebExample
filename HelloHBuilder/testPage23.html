@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>JS闭包缓存</title>
+	</head>
+
+	<body>
+		<script>
+			var person = function() {
+				//变量作用域为函数内部，外部无法访问
+				var name = "default";
+				return {
+					getName: function() {
+						console.log("get");
+						return name;
+					},
+					setName: function(newName) {
+						console.log("set");
+						name = newName;
+					}
+				}
+			};
+			var p = person();
+			//			console.log(p);
+
+			//			function f1() {　　　　
+			//				var n = 999;　　　　
+			//				nAdd = function() {
+			//					n += 1
+			//				}　　　　
+			//				function f2() {　　　　　　
+			//					alert(n);　　　　
+			//				}　　　　
+			//				return f2;　　
+			//			}　　
+			//			var result = f1();　　
+			//			result(); // 999
+			//			　　
+			//			nAdd();　　
+			//			result(); // 1000
+			//			nAdd();　　
+			//			result(); // 1001
+			//			nAdd();　　
+			//			result(); // 1002
+
+			　
+			var name = "The Window";　　
+			var object = {　　　　
+				name: "My Object",
+				getNameFunc: function() {　　　　　　
+					var that = this;　　　　　　
+					return function() {　　　　　　　　
+						return that.name;　　　　　　
+					};　　　　
+				}　　
+			};　　
+			alert(object.getNameFunc()());
+		</script>
+	</body>
+
+</html>

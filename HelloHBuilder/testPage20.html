@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.aa {
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radius: 5px;
+				width: 100px;
+				height: 30px;
+				background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<input type="button" class="aa" value="增加" />
+
+		<script>
+			var getB = function() {
+				var value = ':';
+				return {
+					call: function() {
+						return value;
+					}
+				};
+			};
+
+			alert(getB().call())
+		</script>
+
+	</body>
+
+</html>

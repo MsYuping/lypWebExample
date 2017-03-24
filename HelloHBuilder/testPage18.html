@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			var dd = function() {
+				var Name = "cc";
+				var failed=function(){
+					alert("Failed");
+				};
+				this.Sex = "Boy";
+				this.success = function() {
+					alert("Success");
+				};
+			};
+			
+			alert(dd.Sex);
+			
+            var dom = new dd();
+			alert(dom.Name);
+			alert(dom.Sex);
+			
+			try{dom.failed();}catch(e){alert(e)};
+		
+			
+			dom.success();
+			
+			
+		</script>
+	</body>
+
+</html>

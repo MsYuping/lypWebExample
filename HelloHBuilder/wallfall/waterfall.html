@@ -1,0 +1,71 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="anchor" content="who care?" />
+		<title></title>
+		<style>
+		*{padding: 0;margin:0;}
+    #container{
+        position: relative;
+    }
+    .pin{
+        padding: 15px 0 0 15px;
+        float:left;
+    }
+    .box{
+        padding: 10px;
+        border:1px solid #ccc;
+    }
+    .box img{
+        width:500px;
+        height:auto;
+    }
+		</style>
+		<script src="waterfall.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+
+		<div id="container">
+		</div>
+		<script>
+			var dataImag = ["00.jpg",
+				"01.jpg",
+				"02.jpg",
+				"03.jpg",
+				"04.jpg",
+				"05.jpg",
+				"06.jpg",
+				"07.jpg",
+				"08.jpg",
+				"09.jpg",
+				"11.jpg",
+				"12.jpg",
+				"14.jpg",
+				"16.jpg",
+				"17.jpg",
+				"18.jpg",
+				"19.jpg",
+				"20.jpg",
+				"21.jpg",
+				"22.jpg",
+				"23.jpg",
+				"24.jpg",
+			];
+			
+			var config = {};
+			config.dataImgs = dataImag;
+			config.perLoadCount = 5;//每次加载5张图片
+			var wf = new Waterfall("container",config);
+			
+			window.onscroll = function(){
+				if(wf.checkscrollside()) wf.insertImgs();
+			}
+            window.onresize = function(){
+            	wf.resetPosition();
+            }
+		</script>
+	</body>
+
+</html>

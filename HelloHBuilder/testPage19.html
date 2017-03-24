@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*var scope = "global";
+
+						function t() {
+							alert(scope);
+							console.log(scope);
+							var scope = "local"
+							console.log(scope);
+						}
+						console.log("scope="+scope)
+						t();
+
+						var name = "global";
+						if(true) {
+							var name = "local";
+							console.log("内部"+name)
+						}
+						console.log("外部"+name);*/
+
+			function t(flag) {
+				if(flag) {
+					var s = "ifscope";
+					for(var i = 0; i < 2; i++)
+					;
+				}
+				console.log(i);
+				console.log(s);
+			}
+			t(true);
+		</script>
+	</body>
+
+</html>

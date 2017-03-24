@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			Date.prototype.format = function(format){ 
+	var o = { 
+	"M+" : this.getMonth()+1, //month 
+	"d+" : this.getDate(), //day 
+	"h+" : this.getHours(), //hour 
+	"m+" : this.getMinutes(), //minute 
+	"s+" : this.getSeconds(), //second 
+	"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+	"S" : this.getMilliseconds() //millisecond 
+	} 
+	//将format字符串中的年份格式替换为具体的年份
+	if(/(y+)/.test(format)) {
+		//this.getFullYear()=2016; RegExp.$1.length=0
+		//RegExp.$1是RegExp的一个属性,指的是与正则表达式匹配的第一个 子匹配(以括号为标志)字符串
+	format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+	} 
+	//将除了年份之外的正则匹配为当前日期的具体时间
+	for(var k in o) { 
+		//alert(k+"==="+o[k]);
+	if(new RegExp("("+ k +")").test(format)) { 
+	format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
+	} 
+	} 
+return format; 
+}
+			
+			var dd = new Date();
+			alert(dd+'&&'+dd.format("yyyy-MM-dd hh:mm:ss"));
+		</script>
+	</body>
+
+</html>
