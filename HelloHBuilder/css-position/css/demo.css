@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.demo-box {
+	margin: 20px 20px 20px 20px;
+}
+
+.demo-list li {
+	display: inline-block;
+	vertical-align: middle;
+	width: 180px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 20px 10px;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	line-height: 22px;
+	font-size: 14px;
+}
+
+.demo-necolor li {
+	margin-right: 0px;
+	padding: 20px 0px;
+}
+
+.demo-font {
+	display: inline-block;
+	width: 45%;
+}
+
+.demo-font li {
+	height: 50px;
+	line-height: 50px;
+	margin-bottom: 20px;
+	padding-left: 10px;
+	border-radius: 2px;
+	text-align: left;
+	vertical-align: top;
+	background-color: #c2c2c2;
+	color: #333;
+}
+
+.yahei {
+	font-family: Microsoft YaHei;
+}
+
+.verdana {
+	font-family: Verdana;
+}

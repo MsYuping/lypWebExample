@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>匿名函数的作用域</title>
+	</head>
+	<body>
+		<script>
+		//匿名函数实际上是为全局对象添加了两个属性x和str.可以将全局对象想象成一个大的匿名自执行函数
+		//全局对象称为window.
+			(function(){
+				var x = 3;
+				var str = "global";
+				//...
+			})();
+			
+			//事件驱动模型的特点：代码的运行与否与程序流程无关。主要面向用户，你无法知道用户会如何使用你的程序，因为只能通过回调、事件监听等方式。
+			
+			
+			
+		</script>
+	</body>
+</html>

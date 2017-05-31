@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+
+
+	<button onclick="Y.on()"">Trigger</button>
+
+	<div id="console"></div>
+
+	<script type="text/javascript">
+		var OCX = {
+			on : function(index, callback) {
+				setTimeout(function() {
+					println('$>' + (index));
+					callback();
+				}, 1000);
+			}
+		};
+
+		var count = 0;
+
+		var queue = [];
+		var unfinished = 0;
+
+		var TaskQueue = function() {
+
+			var queues = {};
+			var locks = {};
+
+			setInterval(function() {
+				for ( var k in queues) {
+					var queue = queues[k];
+					if (locks[k] !== true && queue) {
+						var fn = queue.shift();
+						if (fn) {
+							locks[k] = true;
+							fn();
+						}
+					}
+				}
+			}, 500);
+
+			return {
+				push : function(type, fn) {
+					var queue = queues[type] = queues[type] || [];
+					queue.push(fn);
+				},
+				complete : function(type) {
+					locks[type] = false;
+				}
+			};
+		}();
+
+		var Y = {};
+		Y.on = function() {
+			var index = count++;
+			println('$' + index);
+			TaskQueue.push('OCX.on', function() {
+				OCX.on(index, function() {
+					TaskQueue.complete('OCX.on')
+				});
+			});
+		}
+
+		var println = function(text) {
+			var line = document.createElement('div');
+			line.innerText = (+new Date()) + ':' + text;
+			document.getElementById('console').appendChild(line);
+		}
+	</script>
+
+</body>
+</html>

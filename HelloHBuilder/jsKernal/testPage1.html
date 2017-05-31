@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>JS闭包的特性</title>
+		<!--<script type="text/javascript" src="js/base.js"></script>-->
+	</head>
+
+	<body>
+		<script>
+			var outter = [];
+
+			function clouseTest() {
+				var array = ["one", "two", "three", "four"];
+				for(var i = 0; i < array.length; i++) {
+					var x = {};
+					x.no = i;
+					x.text = array[i];
+					x.invoke = function() {
+						console.log(i);
+					}
+					outter.push(x);
+				}
+			}
+
+			clouseTest();
+			outter[0].invoke();
+			outter[1].invoke();
+			outter[2].invoke();
+			outter[3].invoke();
+			
+			var outter = [];
+
+			function clouseTest2() {
+				var array = ["one", "two", "three", "four"];
+				for(var i = 0; i < array.length; i++) {
+					var x = {};
+					x.no = i;
+					x.text = array[i];
+					//、、、、、不同点
+					x.invoke = function(no) {
+						return function() {
+							console.log(no);
+						}
+					}(i);
+					outter.push(x);
+				}
+			}
+			clouseTest2();
+			outter[0].invoke();
+			outter[1].invoke();
+			outter[2].invoke();
+			outter[3].invoke();
+		</script>
+	</body>
+
+</html>

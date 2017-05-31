@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+html {
+	font-family: 'Microsoft Yahei', "Helvetica Neue", Helvetica, Verdana, "PingFang SC", Arial, sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	line-height: 1.4285;
+	font-size: 14px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+	margin: 0;
+	padding: 0;
+}
+
+article, aside, details, figcaption, figure, header, footer, hgroup, main, menu, nav, template, section, summary {
+	display: block;
+}
+
+audio, canvas, progress, video {
+	vertical-align: baseline;
+	display: inline-block;
+}
+
+a, a:focus, a:hover {
+	text-decoration: none;
+}
+
+a:active, a:hover {
+	outline: 0
+}
+
+b, strong {
+	font-weight: 700;
+}
+
+img {
+	border: none;
+	border-image: none;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+ul, li, ol {
+	list-style: none;
+}
+
+hr {
+	margin: 10px 0px;
+	clear: both;
+	border: none;
+	border-bottom: solid 1px #e2e2f2;
+	box-sizing: content-box;
+}
+
+code {
+	font-family: monospace;
+	font-size: 1em;
+}
+
+pre {
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word
+}
+
+fieldset {
+	margin: 0px 2px;
+	padding: 0.3em 0.6em 0.7em;
+	border: 1px solid #c0c0c0;
+	border-image: none;
+}
+
+legend {
+	padding: 0px;
+	border: none;
+	border-image: none;
+}
+
+button, input, optgroup, option, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0
+}
+
+select {
+	text-transform: none;
+}
+
+button {
+	cursor: pointer;
+	overflow: visible;
+	text-transform: none;
+	-webkit-appearance: button;
+}
+
+button[disabled] {
+	cursor: default;
+}
+
+input {
+	line-height: normal;
+}
+
+input[type=button], input[type=reset], input[type=submit] {
+	cursor: pointer;
+	-webkit-appearance: button;
+}
+
+input[disabled] {
+	cursor: default;
+}
+
+input[type=checkbox] {
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+input[type=radio] {
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+input[type=search] {
+	box-sizing: content-box;
+	-webkit-appearance: textfield;
+}
+
+textarea {
+	overflow: auto;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+td, th {
+	padding: 0px;
+}
+
+*, ::after, ::before {
+	box-sizing: border-box;
+}
+
+[hidden] {
+	display: none;
+}
+
+::-webkit-scrollbar {
+	width: 14px;
+	height: 14px;
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {
+	border-radius: 999px;
+	border: 5px solid transparent;
+}
+
+::-webkit-scrollbar-track {
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-webkit-scrollbar-thumb {
+	min-height: 20px;
+	background-clip: content-box;
+	box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+::-o-scrollbar {
+	width: 14px;
+	height: 14px;
+}
+
+::-o-scrollbar-track, ::-o-scrollbar-thumb {
+	border-radius: 999px;
+	border: 5px solid transparent;
+}
+
+::-o-scrollbar-track {
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-o-scrollbar-thumb {
+	min-height: 20px;
+	background-clip: content-box;
+	box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-o-scrollbar-corner {
+	background: transparent;
+}
+
+::-ms-scrollbar {
+	width: 14px;
+	height: 14px;
+}
+
+::-ms-scrollbar-track, ::-ms-scrollbar-thumb {
+	border-radius: 999px;
+	border: 5px solid transparent;
+}
+
+::-ms-scrollbar-track {
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-ms-scrollbar-thumb {
+	min-height: 20px;
+	background-clip: content-box;
+	box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-ms-scrollbar-corner {
+	background: transparent;
+}
+
+::-moz-scrollbar {
+	width: 14px;
+	height: 14px;
+}
+
+::-moz-scrollbar-track, ::-moz-scrollbar-thumb {
+	border-radius: 999px;
+	border: 5px solid transparent;
+}
+
+::-moz-scrollbar-track {
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-moz-scrollbar-thumb {
+	min-height: 20px;
+	background-clip: content-box;
+	box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-moz-scrollbar-corner {
+	background: transparent;
+}

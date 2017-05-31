@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>JS对象引用</title>
+		<!--<script type="text/javascript" src="js/base.js"></script>-->
+	</head>
+
+	<body>
+		<script>
+		    function print(str){
+		    	console.log(str);
+		    }
+			var obj = {}; //空对象
+			var ref = obj; //引用
+			obj.name = "objectA";
+			print(ref.name); //ref跟着添加了name属性
+			obj = ["one", "two", "three"]; //obj指向了另一个对象(数组对象)
+			print(ref.name); //ref还指向原来的对象
+			print(obj.length); //3
+			print(ref.length); //undefined
+		</script>
+	</body>
+
+</html>

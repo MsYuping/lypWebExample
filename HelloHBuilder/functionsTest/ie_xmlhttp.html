@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>XMLHTTP</title>
+</head>
+<body>
+
+	<table>
+		<tr>
+			<td align="right">Url: </td>
+			<td><input id="input" style="width: 300px;" value="https://www.so.com/" /><input type="button" value="Confirm" onclick="confirm()" /></td>
+		</tr>
+		<tr>
+			<td align="right">Response: </td>
+			<td><textarea id="output" style="width: 500px; height: 300px;"></textarea></td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		var HTTP = {
+			get : function(url) {
+				var xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
+				xmlhttp.open('GET', url, false, '', '');
+				xmlhttp.send('');
+				return xmlhttp.responseText;
+			}
+		}
+
+		var confirm = function() {
+			var oInput = document.getElementById('input');
+			var oOutput = document.getElementById('output');
+			oOutput.value = HTTP.get(oInput.value);
+		}
+	</script>
+</body>
+</html>
