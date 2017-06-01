@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type='text/javascript' src="jquery-1.7.2.js"></script>
+		<script type='text/javascript' src="js/pttActiveOcx1.js"></script>
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				overflow: auto;
+			}
+			
+			div {
+				text-align: center;
+				line-height: 50px
+			}
+			
+			.video-container {
+				width: 100%;
+				height: 100%;
+				border: 1px solid #c1c1c1;
+				position: absolute;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body onload="initObj()">
+		<div class="video-container" id="videocontainerID">
+			<!--<object id="CPTTActivexMeetingCtrl" classid="clsid:A0036968-06A0-4BB6-9E13-F2B8C59EE8CA" width=100% height=100%></object>-->
+		</div>
+	</body>
+
+</html>
+<script>
+	var voipCallObj;
+
+	function initObj() {
+		voipCallObj = new ocx.MEETING({
+			'divid': 'videocontainerID',
+			'width': '100%',
+			'height': '100%'
+		});
+	}
+</script>

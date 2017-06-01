@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>postMessage API Test1</title>
+	</head>
+	<body>
+		<input type="button" value="postMessage" onclick="postMsg()"/>
+		<script>
+			if(typeof window.postMessage ==="undefined"){
+				alert("浏览器不支持postMessage");
+			}else{
+				alert(typeof window.postMessage);
+				
+				
+			}
+			function postMsg(){
+				window.postMessage("Hello, world","127.0.0.1:8020/");
+			}
+		</script>
+	</body>
+</html>

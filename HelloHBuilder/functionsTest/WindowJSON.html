@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>window自带对象JSON的使用</title>
+	</head>
+	<body>
+		<script>
+			var json = {name:'liuyuping',age:25};
+			var jsonStr =window.JSON.stringify(json); 
+			alert(jsonStr);
+			var jsonObj = window.JSON.parse(jsonStr); 
+			alert(jsonObj.name);
+				
+		</script>
+	</body>
+</html>

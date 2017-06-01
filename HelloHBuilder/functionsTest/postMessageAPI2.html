@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>postMessage API Test2</title>
+	</head>
+	<body>
+		<script>
+			if(typeof window.postMessage ==="undefined"){
+				alert("浏览器不支持postMessage");
+			}else{
+				//注册消息事件监听器
+				window.addEventListener("message",messageHandler,true);
+				function messageHandler(e){
+					alert(333);
+					alert(e.origin);
+					alert(e.data);
+				}
+			}
+		</script>
+	</body>
+</html>

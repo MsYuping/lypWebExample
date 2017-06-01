@@ -1,0 +1,720 @@
+<html>
+
+	<head>
+		<title>我的第一个 HTML 页面</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type='text/javascript' src="jquery-1.7.2.js"></script>
+		<script type='text/javascript' src="js/pttActiveOcx1.js"></script>
+	</head>
+
+	<body onload="btnInit();btnLogin();">
+		<div id="ocxContainer"></div>
+		<!--装载PTTControl插件的容器-->
+		<div id="ocxVersionContainer"></div>
+		服务器IP:<input type="text" id="serverIP" value="221.7.12.35" /> 调度台ID:
+		<input type="text" id="ddtID" value="40000001" /> 调度台名称:
+		<input type="text" id="ddtName" value="调度台" />
+		<table border="1px">
+			<tr>
+				<td width="200px"><input type="button" value="初始化" onclick="btnInit()" /></td>
+				<td width="200px"></td>
+				<td width="200px" rowspan="3">
+					<textarea id="resultInfo" readonly="true" rows="20" cols="60"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="登录" onclick="btnLogin()" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>注册监听事件:<input type="text" value="USERONLINE" id="eventListener" /></td>
+				<td><input type="button" value="确定" onclick="addPushEvent()" /></td>
+			</tr>
+			<tr>
+				<td>取消监听事件:<input type="text" value="USERONLINE" id="cancelEventListener" /></td>
+				<td><input type="button" value="确定" onclick="removePushEvent()" /></td>
+			</tr>
+
+		</table>
+
+		<table border="1px">
+			<tr>
+				<td><input type="button" value="注册所有监听事件" onclick="addAllPushEvent()" />OK</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="移除所有监听事件" onclick="removeAllPushEvent()" />OK</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="获取版本号信息" onclick="getVersion()" />OK</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="关闭调度台" onclick="ClosePTTCenter()" />OK</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="创建临时组" onclick="createTempGroup()" />OK</td>
+				<td>
+					组名：<input id="groupName" type="text" value="test1" /> 人数：
+					<input id="groupNum" type="text" value="2" /> 成员：
+					<input id="groupMember" type="text" value="80001016/80001017/" />
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="修改临时组" onclick="ModifyTempGroup()" />OK</td>
+				<td>
+					原临时组名称：<input id="groupOldName" type="text" value="test1" /> 新临时组名称：
+					<input id="groupNewName" type="text" value="test2" /> 增加临时组用户ID：
+					<input id="groupAdMember" type="text" value="80001016/80001017/" /> 删除临时组用户ID：
+					<input id="groupDelMember" type="text" value="80001016/80001017/" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="删除临时组" onclick="deleteTempGroup()" />OK</td>
+				<td>
+					临时组名称：<input id="groupTempName" type="text" value="test1" /> 临时组ID：
+					<input id="groupID" type="text" value="253" />
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="呼叫(单呼组呼全呼)" onclick="requestCall()" />OK</td>
+				<td>
+					被叫组ID(单呼组呼填组ID，全呼为1)：<input id="CallGroupID" type="text" value="91" /> 被叫用户ID：
+					<input id="CallUserID" type="text" value="40001008" /> 呼叫类型(0(单呼)，1(组呼)，2(全呼))：
+					<input id="CallType" type="text" value="0" /> 被叫组用户数：
+					<input id="CallGroupUserNum" type="text" value="0" />
+				</td>
+				<td><input type="button" value="取消呼叫" onclick="ReleaseCall()" />0(普通呼叫),1(全呼),2(语音播放)</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="代建全呼" onclick="CallCollocation()" />OK</td>
+				<td>
+					召集的组ID：<input id="gCollGroupID" type="text" value="253/254/" /> 类型（0(调度台全呼),1(代建全呼)）：
+					<input id="gCollType" type="text" value="0" /> 代建人ID：
+					<input id="gCollCreatID" type="text" value="0" /> 组类型（0(本单位)、1(下级单位）
+					<input id="gCollGroupType" type="text" value="0" /></td>
+				<td><input type="button" value="解散全呼" onclick="ReleaseCollocation()" />OK</td>
+				<td>召集返回的组ID：<input id="CollReturnGroupID" type="text" value="1" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="屏幕截图" onclick="screenshot()" />OK</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="用户激活" onclick="UserActive()" />需要链路网关才能激活</td>
+				<td><input type="text" id="activeUserId" value="40001008" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="用户销毁" onclick="DestoryUser()" />OK</td>
+				<td><input type="text" id="destroyUserId" value="40001008" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="用户启用、禁用" onclick="DisableUser()" />OK</td>
+				<td>0(禁用)，1(恢复启用) <input type="text" id="disableUserIdType" value="0" /><input type="text" id="disableUserId" value="40001008" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="用户遥毙、禁言" onclick="killer()" />OK</td>
+				<td>1遥毙 2禁言;<input type="text" id="ybjynType" value="1" /> 0单用户 1组;<input type="text" id="ybjyuserType" value="1" />用户id、组id <input type="text" id="ybjyUserId" value="40001008" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="用户去除遥毙、禁言" onclick="unkiller()" />OK</td>
+				<td>1遥毙 2禁言;<input type="text" id="unybjynType" value="1" /> 0单用户 1组;<input type="text" id="unybjyuserType" value="0" />用户id、组id <input type="text" id="unybjyUserId" value="40001008" /></td>
+			</tr>
+
+			<tr>
+				<td><input type="button" value="预设/取消预设监听" onclick="DefListen()" />OK（取消预设监听不可用？？）</td>
+				<td>0(预设)，1(取消预设) <input type="text" id="DefListen1" value="0" />0、监听组，1、监听终端 <input type="text" id="DefListen2" value="1" />组ID、终端ID<input type="text" id="DefListen3" value="40001008" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="信道监听" onclick="MonitorChannel()" />OK</td>
+				<td>0：监听，1：取消监听<input type="text" id="MonitorChannel1" value="0" />信道类型：209：单呼，210：组呼<input type="text" id="MonitorChannel2" value="209" /> 信道ID<input type="text" id="MonitorChannel3" value="100" />主叫ID<input type="text" id="MonitorChannel4" value="40001007" />被叫ID，组呼则是组ID<input type="text" id="MonitorChannel5" value="40001008" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="拆除信道" onclick="RemoveChannel()" />OK</td>
+				<td>信道ID<input type="text" id="RemoveChannel1" value="100458" />主叫ID<input type="text" id="RemoveChannel2" value="40001007" />被叫ID<input type="text" id="RemoveChannel3" value="40001008" />组ID <input type="text" id="RemoveChannel4" value="91" />服务号ID<input type="text" id="RemoveChannel5" value="88" />信道状态<input type="text" id="RemoveChannel6" value="209" /></td>
+			</tr>
+
+			<tr>
+				<td><input type="button" value="获取当前通话信息" onclick="GetCurrentCall()" />OK</td>
+				<td><input type="text" value="" id="GetCurrentCall1" style="width:500px;" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="操作GPS" onclick="OpenGPS()" />OK</td>
+				<td> 0(开启)，1(关闭) <input type="text" value="0" id="OpenGPS1" />终端ID<input type="text" value="40001008" id="OpenGPS2" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="处理报警信息" onclick="DealAlarmInfo()" /></td>
+				<td>用户ID<input type="text" value="40001008" id="DealAlarmInfo1" />报警时间<input type="text" value="" id="DealAlarmInfo2" />处理描述信息<input type="text" value="" id="DealAlarmInfo3" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="设置对讲语音编码方式" onclick="SetCallCodecType()" />OK</td>
+				<td>0（G729）、1（AMR-WB），默认设定方式为0<input type="text" id="SetCallCodecType1" value="0" /></td>
+			</tr>
+
+			<tr>
+				<td><input type="button" value="登录VOIP" onclick="LoginToVoip()" />OK</td>
+				<td>voip服务器地址<input type="text" id="LoginToVoip1" value="221.7.12.35" />voip服务器端口<input type="text" id="LoginToVoip2" value="5065" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="VOIP通话" onclick="CallVoip()" />OK</td>
+				<td>通话类型0(语音通话)、1(视频通话)<input type="text" id="CallVoip1" value="0" />主叫ID(调度台ID)<input type="text" id="CallVoip2" value="40000001" />被叫ID<input type="text" id="CallVoip3" value="40001008" /><input type="button" value="挂断" onclick="ddtHangUp()" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="VOIP来电监听" onclick="MonitorVoipCalled()" />OK</td>
+				<td><input type="text" id="MonitorVoipCalled1" value="" /><input type="button" value="接听" onclick="Answer_Voip('0')" /><input type="button" value="拒接" onclick="Reject_Voip()" /><input type="button" value="挂断" onclick="Answer_Voip('1')" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="打开视频监控" onclick="OpenVideoVoip('0')" />OK</td>
+				<td>调度台ID<input type="text" id="OpenVideoVoip1" value="40000001" />对方ID<input type="text" id="OpenVideoVoip2" value="40001007" />0-开启；1-关闭<input type="text" id="OpenVideoVoip3" value="0" />strID<input type="text" id="OpenVideoVoip4" value="voipvideo1" />
+				<input type="button" value="关闭视频监控" onclick="OpenVideoVoip('1')" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="分享视频" onclick="ForwardVideo()" />OK</td>
+				<td>调度台ID<input type="text" value="40000001" id="ForwardVideo1" />上传终端ID<input type="text" value="40001008" id="ForwardVideo2" />需转发总数<input type="text" value="1" id="ForwardVideo3" />转发终端<input type="text" value="40001007/" id="ForwardVideo4" /></td>
+			</tr>
+			<tr>
+			<tr>
+				<td><input type="button" value="加入会议室" onclick="CallMeetingVoip()" />OK</td>
+				<td>调度台ID<input type="text" value="40000001" id="CallMeetingVoip1" />会议室ID<input type="text" value="c8868175" id="CallMeetingVoip2" />会议类型0：语音 1：语音+视频<input type="text" value="1" id="CallMeetingVoip3" /></td>
+			</tr>
+			<tr>
+				<td>复制链接至浏览器中执行(邀请终端参加会议)</td>
+				<td>调度台ID<input type="text" style="width:600px;" value="http://221.7.12.35:8080/app/callmemeber.php?roomid=c8868175&callee=40001008"/></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="退出会议室" onclick="ExitMeetingVoip()" />OK</td>
+				<td>调度台ID<input type="text" value="40000001" id="ExitMeetingVoip1" />会议室ID<input type="text" value="c8868175" id="ExitMeetingVoip2" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="录音" onclick="RecordVoice('0')" /><input type="button" value="停止录音" onclick="RecordVoice('2')" /><input type="button" value="发送录音" onclick="RecordVoice('1')" />OK</td>
+				<td><input type="text" value="" id="RecordVoice1" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="播放语音" onclick="PlayVoice('2')" /><input type="button" value="暂停" onclick="StopVoice('0')" /><input type="button" value="停止" onclick="StopVoice('1')" /></td>
+				<td><input type="text" style="width:1200px;" value="http://221.7.12.35:29014/gstone/history/voice!downloadYuyin.action?voiceId=59274" id="PlayVoice2" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="播放消息语音" onclick="PlayVoice('0')" /><input type="button" value="停止消息语音" onclick="StopHistoryMsgVoice()" />OK(停止不可用)</td>
+				<td><input type="text" style="width:1200px;" value="http://221.7.12.35:29014/message/getAttachmentDetail.action?isConsole=1&userId=40000001&userPwd=81dc9bdb52d04dc20036dbd8313ed055&messageId=1201&type=1" id="PlayVoice0" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="上传音频文件" onclick="UpLoadVoiceMsg()" />OK</td>
+				<td><input type="text" style="width:600px;" value="C:\\\\Users\\\\Wx\\\\20170527094531.pttly" id="UpLoadVoiceMsg1" /></td>
+			</tr>
+		</table>
+		<!--<div id="cccccc" style="width:500px;height:500px;border:1px solid red;">
+			<object id="CPTTActivexMeetingCtrl" classid="clsid:a0036968-06a0-4bb6-9e13-f2b8c59ee8ca" width="100%" height="100%"></object>
+		</div>-->
+	</body>
+
+</html>
+
+<script>
+	var objOCX;
+	var ip = document.getElementById("serverIP").value;
+	var callingStr = null;
+	var videoMonitorWin = null;
+	//======voip相关===========
+	function CallMeetingVoip(){
+		var char1 = document.getElementById("CallMeetingVoip1").value;
+		var char2 = document.getElementById("CallMeetingVoip2").value;
+		var char3 = document.getElementById("CallMeetingVoip3").value;
+		
+		calledvideo = window.open("meeting.html", "", "height=600, width=800, center=no, scrollbars=no, resizable=yes,menubar=no");
+	    var result = objOCX.JoinMeeting_Voip(char1,char2,char3,function(str){
+	    	logInfo("JoinMeeting_Voip回调结果："+str+"\n");
+	    	//////此处给参会人员发送加入会议的请求
+	    	
+	    });
+	    alert(result);
+	}
+	function ExitMeetingVoip(){
+		var char1 = document.getElementById("ExitMeetingVoip1").value;
+		var char2 = document.getElementById("ExitMeetingVoip2").value;
+		var result = objOCX.ExitMeeting_Voip(char1,char2,function(str){
+		  	logInfo("ExitMeeting_voip回调结果："+str+"\n");
+		  	if(calledvideo){
+		  		calledvideo.close();
+		        calledvideo = undefined;
+		  	}
+		    objOCX.setVoipState(null);
+		});
+		alert(result);
+	}
+	
+	
+	function ForwardVideo() {
+		var char1 = document.getElementById("ForwardVideo1").value;
+		var char2 = document.getElementById("ForwardVideo2").value;
+		var char3 = document.getElementById("ForwardVideo3").value;
+		var char4 = document.getElementById("ForwardVideo4").value;
+		var result = objOCX.ForwardVideo(char1, char2, char3.toString(), char4);
+		alert("视频分享结果:" + result);
+	}
+
+	function OpenVideoVoip(char3) {
+		var char1 = document.getElementById("OpenVideoVoip1").value;
+		var char2 = document.getElementById("OpenVideoVoip2").value;
+//		var char3 = document.getElementById("OpenVideoVoip3").value;
+		var char4 = document.getElementById("OpenVideoVoip4").value;
+
+		if(char3 == 0) { //开启视频
+			//自动注册终端主动关闭视频后的监听事件B5消息，注意先清除数据状态，最后关闭窗口
+			objOCX.addEventListener('REQ_VIDEOSTATE', function(str) {
+				logInfo("收到B5,终端主动挂断视频返回:" + str);
+				eval("strJson1 = {" + str + "};");
+				var openResult = objOCX.OpenVideo_Voip(char1, char2, '1', char4, function(str) {
+					logInfo("OpenVideoVoip关闭返回:" + str + "\n");
+					eval("strJson = {" + str + "};");
+					objOCX.setVoipState(null);
+				});
+				videoMonitorWin.close();
+			});
+
+			var result = objOCX.OpenVideo('0', char2, function(str) {
+				logInfo("OpenVideo打开返回:" + str + "\n");
+				eval("strJson = {" + str + "};");
+				if(strJson.nResult == 0) {
+					videoMonitorWin = window.open("voipVideoMonitor.html", "", "height=300, width=500, center=no, scrollbars=no, resizable=no,menubar=no");
+				} else if(strJson.nResult == 1) { //失败原因
+					logInfo("打开失败，失败原因：" + strJson.nReason);
+				}
+			});
+		} else if(char3 == 1) { //关闭视频
+			var res1 = objOCX.OpenVideo_Voip(char1, char2,'1', function(str) {
+				logInfo("OpenVideo_Voip关闭返回：" + str + "\n");
+			});
+			if(res1){
+				objOCX.setVoipState(null);
+				videoMonitorWin.close();
+			}
+		}
+	}
+	
+	function loadOCX() {
+		alert(3);
+		var char1 = document.getElementById("OpenVideoVoip1").value;
+		var char2 = document.getElementById("OpenVideoVoip2").value;
+		var char3 = document.getElementById("OpenVideoVoip3").value;
+		var char4 = document.getElementById("OpenVideoVoip4").value;
+		
+		var openResult = objOCX.OpenVideo_Voip(char1, char2, char3, char4, function(str) {
+			eval("strJson = {" + str + "};");
+			logInfo("OpenVideoVoip打开视频监控返回："+str+"\n");
+		});
+	}
+	
+	var sec = 5; //循环检验窗体的次数
+	var flag;
+
+	function testWin(winObj, ocxid) { //视频窗口是否正常打开，能否获取到容器的objectid，并且setActivexID成功
+		console.log("sec===" + sec);
+		try {
+			if(winObj == undefined || winObj == null) {
+				console.log(winObj);
+				return false;
+			}
+			var pttObj = winObj.document.getElementById(ocxid);
+			var SAIResult = pttObj.SetActivexID("");
+			if(SAIResult) {
+				return true;
+			}
+		} catch(e) {}
+
+		if(--sec > 0) {
+			flag = setTimeout(function() {
+				testWin(winObj, ocxid);
+			}, 1000);
+		} else {
+			window.clearTimeout(flag);
+			return false;
+		}
+	}
+	
+	function Reject_Voip() {
+		if(callingStr == null) {
+			alert("操作错误");
+			return;
+		}
+		eval("strJson = {" + callingStr + "};");
+		objOCX.Reject_Voip('40000001', strJson.nRemoteID, function(str) {
+			logInfo("VOIP拒接返回：" + str + "\n");
+			eval("strJson = {" + str + "};");
+			if(strJson.nState == 0) { //调度台直接挂断
+				logInfo("Answer_Voip:调度台挂断");
+			}
+			objOCX.setVoipState(null);
+			document.getElementById("MonitorVoipCalled1").value = "Reject_Voip:挂断";
+		});
+	}
+  //voip通话挂断
+	function ddtHangUp() {
+		var char1 = document.getElementById("CallVoip1").value;
+		var char2 = document.getElementById("CallVoip2").value;
+		var char3 = document.getElementById("CallVoip3").value;
+		objOCX.Answer_Voip('1', char2, char3, char1, function(str) {
+			logInfo("VOIP挂断返回：" + str + "\n");
+			eval("strJson = {" + str + "};");
+			if(strJson.nState == 0) { //通话过程中，终端挂断
+				logInfo("ddtHangUp--Answer_Voip:挂断");
+				if(strJson.nMediaType == 1) {
+					console.log("HangUp关闭voip电话窗口");
+					calledvideo.close();
+					calledvideo = undefined;
+				}
+				objOCX.setVoipState(null);
+			}
+		});
+
+	}
+
+	function Answer_Voip(strType) {
+		eval("strJson = {" + callingStr + "};");
+		if(strJson.nMediaType == 1) {
+			objOCX.openVideoWin();
+		}
+		objOCX.Answer_Voip(strType, '40000001', strJson.nRemoteID, strJson.nMediaType, function(str) {
+			logInfo("VOIP接听返回：" + str + "\n");
+			eval("strJson = {" + str + "};");
+			if(strJson.nState == 4) {
+				logInfo("Answer_Voip:终端接通，通话中...");
+				document.getElementById("MonitorVoipCalled1").value = "Answer_Voip:终端接通，通话中...";
+			} else if(strJson.nState == 0) { //通话过程中，终端挂断
+				logInfo("Answer_Voip:挂断");
+				if(strJson.nMediaType == 1) {
+					objOCX.closeVideoWin();
+				}
+				objOCX.setVoipState(null);
+				document.getElementById("MonitorVoipCalled1").value = "Answer_Voip:挂断";
+			}
+		});
+	}
+
+	function MonitorVoipCalled() { //监听VOIP来电
+		objOCX.addCallBackEventListener('REQ_CALLRESULT_VOIP', function(str) {
+			logInfo("VOIP来电监听:" + str + "\n");
+			callingStr = str;
+			document.getElementById("MonitorVoipCalled1").value = "您有新的来电...";
+		});
+	}
+
+	var calledvideo; //被叫VOIP电话视频窗口
+	function CallVoip() {
+		var char1 = document.getElementById("CallVoip1").value;
+		var char2 = document.getElementById("CallVoip2").value;
+		var char3 = document.getElementById("CallVoip3").value;
+		if(char1 == 1) {
+			calledvideo = window.open("voipVideo.html", "", "height=300, width=500, center=no, scrollbars=no, resizable=no,menubar=no");
+			var isOpen = testWin(calledvideo, 'CPTTActivexOwnVideoCtrl');
+			console.log("窗口是否打开成功=" + isOpen);
+			if(!isOpen) {
+				return;
+			}
+		}
+		var result = objOCX.Call_Voip(char1, char2, char3, function(str) {
+			logInfo("Call_Voip：" + str + "\n");
+			eval("strJson = {" + str + "};");
+			if(strJson.nState == 4) {
+				logInfo("Call_Voip:终端接通,通话中...");
+			} else if(strJson.nState == 0) {
+				logInfo("Call_Voip:终端挂断");
+				if(strJson.nMediaType == 1) {
+					setTimeout(function() {
+						calledvideo.close();
+						calledvideo = undefined;
+					}, 50);
+				}
+				objOCX.setVoipState(null);
+			}
+		});
+	}
+
+	function LoginToVoip() {
+		var char1 = document.getElementById("LoginToVoip1").value;
+		var char2 = document.getElementById("LoginToVoip2").value;
+		var result = objOCX.LoginToVoip(char1, char2, function(str) {
+			logInfo("voip登录返回：" + str + "\n");
+		});
+		alert("调用结果：" + result + ",等待服务器返回...");
+	}
+
+	//=========================================VOIP END========================================
+	function btnInit() {
+		//初始化OCX对象,参数传入div的id名称
+		objOCX = new ocx.PTTCONTROL({
+			'divid': 'ocxContainer',
+			'ServerIP': ip,
+			'ServerPort': '29010'
+		});
+	}
+
+	function btnLogin() {
+		//需要默认注册的网络错误的监听事件
+		objOCX.addEventListener('LOGINFAIL', function(str) {
+			logInfo("网络错误，调度台断开连接:" + str + "\n");
+			alert("调度台断开连接");
+		});
+
+		var ddtid = document.getElementById("ddtID").value;
+		var ddtName = document.getElementById("ddtName").value;
+		var isLoginId = objOCX.Login(ddtName, ddtid, '1234', function(str) {
+			logInfo("登录返回值：" + str);
+		});
+
+	}
+
+	function addPushEvent() {
+		var type = document.getElementById("eventListener").value;
+		objOCX.addEventListener(type, function(str) {
+			logInfo("自动监听事件:" + str + "\n");
+		});
+	}
+
+	function removePushEvent() {
+		var type = document.getElementById("cancelEventListener").value;
+		objOCX.removeEventListener(type);
+	}
+
+	function addAllPushEvent() {
+		for(var key in ocx.pushEvent) {
+			objOCX.addEventListener(key, function(str) {
+				logInfo("自动监听事件:" + str + "\n");
+			});
+		}
+	}
+
+	function removeAllPushEvent() {
+		for(var key in ocx.pushEvent) {
+			objOCX.removeEventListener(key);
+		}
+	}
+
+	function getVersion() {
+		//var verNo = objOCX.GetVersion();
+		//logInfo("插件版本:"+verNo+"\n");
+		var objOCX = new ocx.PTTCONTROLVERSION({
+			'divid': 'ocxVersionContainer'
+		});
+		var version = objOCX.GetVersion();
+		alert(version);
+	}
+
+	function ClosePTTCenter() {
+		var result = objOCX.ClosePTTCenter();
+		if(result) {
+			alert("调度台断开连接");
+		}
+	}
+
+	function createTempGroup() {
+		var groupName = document.getElementById("groupName").value;
+		var groupNum = document.getElementById("groupNum").value;
+		var groupMemeber = document.getElementById("groupMember").value;
+
+		var result = objOCX.CreateTempGroup(groupName, groupNum, groupMemeber, '1', function(str) {
+			logInfo("临时组创建返回:" + str + "\n");
+		});
+	}
+
+	function ModifyTempGroup() {
+		var groupOldName = document.getElementById("groupOldName").value;
+		var groupNewName = document.getElementById("groupNewName").value;
+		var groupAdMember = document.getElementById("groupAdMember").value;
+		var groupDelMember = document.getElementById("groupDelMember").value;
+		var result = objOCX.ModifyTempGroup(groupOldName, groupNewName, groupAdMember, groupDelMember, function(str) {
+			logInfo("临时组修改返回:" + str + "\n");
+		});
+	}
+
+	function deleteTempGroup() {
+		var groupTempName = document.getElementById("groupTempName").value;
+		var groupID = document.getElementById("groupID").value;
+		var result = objOCX.DeleteTempGroup(groupTempName, groupID, function(str) {
+			logInfo("临时组删除返回：" + str + "\n");
+		});
+	}
+
+	function requestCall() {
+		var CallGroupID = document.getElementById("CallGroupID").value;
+		var CallUserID = document.getElementById("CallUserID").value;
+		var CallType = document.getElementById("CallType").value;
+		var CallGroupUserNum = document.getElementById("CallGroupUserNum").value;
+		var result = objOCX.RequestCall(CallGroupID, CallUserID, CallType, CallGroupUserNum, function(str) {
+			logInfo("请求返回结果：" + str + "\n");
+		});
+		alert(result);
+	}
+
+	function ReleaseCall() {
+		var result = objOCX.ReleaseCall();
+		alert(result);
+	}
+
+	function CallCollocation() {
+		var gCollGroupID = document.getElementById("gCollGroupID").value;
+		var gCollType = document.getElementById("gCollType").value;
+		var gCollCreatID = document.getElementById("gCollCreatID").value;
+		var gCollGroupType = document.getElementById("gCollGroupType").value;
+		var result = objOCX.CallCollocation(gCollGroupID, gCollType, gCollCreatID, gCollGroupType, function(str) {
+			logInfo("请求返回结果：" + str + "\n");
+		});
+	}
+
+	function ReleaseCollocation() {
+		var gCollGroupID = document.getElementById("CollReturnGroupID").value;
+		var result = objOCX.ReleaseCollocation(gCollGroupID, function(str) {
+			logInfo("请求返回结果：" + str + "\n");
+		});
+	}
+
+	function screenshot() {
+		var result = objOCX.Screenshot('1');
+		alert(result);
+	}
+
+	function UserActive() {
+		var userid = document.getElementById("activeUserId").value;
+		var result = objOCX.UserActive(userid, function(str) {
+			logInfo("激活返回值：" + str + "\n");
+		});
+		alert(result);
+	}
+
+	function DestoryUser() {
+		var userid = document.getElementById("destroyUserId").value;
+		objOCX.DestoryUser(userid);
+	}
+
+	function DisableUser() {
+		var userid = document.getElementById("disableUserId").value;
+		var nType = document.getElementById("disableUserIdType").value;
+		objOCX.DisableUser(nType, userid, function(str) {
+			logInfo("启用禁用返回值：" + str + "\n");
+		});
+	}
+
+	function killer() {
+		var nType = document.getElementById("ybjynType").value;
+		var userType = document.getElementById("ybjyuserType").value;
+		var userId = document.getElementById("ybjyUserId").value;
+		var result = objOCX.KillorGAGUser(nType, userType, userId, function(str) {
+			logInfo("遥毙禁言返回：" + str + "\n");
+		});
+		alert(result);
+	}
+
+	function unkiller() {
+		var nType = document.getElementById("unybjynType").value;
+		var userType = document.getElementById("unybjyuserType").value;
+		var userId = document.getElementById("unybjyUserId").value;
+		var result = objOCX.ReleaseKillorGAGUser(nType, userType, userId, function(str) {
+			logInfo("解除遥毙禁言返回：" + str + "\n");
+		});
+		alert(result);
+	}
+
+	function DefListen() {
+		var char1 = document.getElementById("DefListen1").value;
+		var char2 = document.getElementById("DefListen2").value;
+		var char3 = document.getElementById("DefListen3").value;
+		var result = objOCX.DefListen(char1, char2, char3);
+		alert(result);
+	}
+
+	function MonitorChannel() {
+		var char1 = document.getElementById("MonitorChannel1").value;
+		var char2 = document.getElementById("MonitorChannel2").value;
+		var char3 = document.getElementById("MonitorChannel3").value;
+		var char4 = document.getElementById("MonitorChannel4").value;
+		var char5 = document.getElementById("MonitorChannel5").value;
+		var result = objOCX.MonitorChannel(char1, char2, char3, char4, char5, function(str) {
+			logInfo("信道监听返回：" + str);
+		});
+		alert(result);
+	}
+
+	function RemoveChannel() {
+		var char1 = document.getElementById("RemoveChannel1").value;
+		var char2 = document.getElementById("RemoveChannel2").value;
+		var char3 = document.getElementById("RemoveChannel3").value;
+		var char4 = document.getElementById("RemoveChannel4").value;
+		var char5 = document.getElementById("RemoveChannel5").value;
+		var char6 = document.getElementById("RemoveChannel6").value;
+		var result = objOCX.RemoveChannel(char1, char2, char3, char4, char5, char6, function(str) {
+			logInfo("信道监听返回：" + str);
+		});
+		alert(result);
+	}
+
+	function GetCurrentCall() {
+		var result = objOCX.GetCurrentCall();
+
+		document.getElementById("GetCurrentCall1").value = result;
+		logInfo(result + "\n");
+	}
+
+	function OpenGPS() {
+		var char1 = document.getElementById("OpenGPS1").value;
+		var char2 = document.getElementById("OpenGPS2").value;
+		var result = objOCX.OpenGPS(char1, char2, function(str) {
+			logInfo("GPS操作返回：" + str + "\n");
+		});
+    alert(result);
+	}
+
+	function DealAlarmInfo() {
+		var char1 = document.getElementById("DealAlarmInfo1").value;
+		var char2 = document.getElementById("DealAlarmInfo2").value;
+		var char3 = document.getElementById("DealAlarmInfo3").value;
+		var result = objOCX.DealAlarmInfo(char1, char2, char3);
+		alert(result);
+	}
+
+	function SetCallCodecType() {
+		var char1 = document.getElementById("SetCallCodecType1").value;
+		var result = objOCX.SetCallCodecType(char1);
+		alert(result);
+	}
+	
+	//============================语音历史记录播放==============================
+	function RecordVoice(nType){
+		alert(nType);
+		var result = objOCX.RecordVoice(nType,function(str){
+			logInfo("录音回调函数："+str+'\n');
+		});
+		var str = '';
+		if(result==0){
+			str = "开始录音";
+		}else if(result ==7){
+			str = "未发现录音设备";
+		}else if(result ==8){
+			str = "音频播放失败";
+		}
+		document.getElementById('RecordVoice1').value =result+":"+str;
+	}
+	function PlayVoice(nType){
+		var url = document.getElementById('PlayVoice'+nType).value;
+		alert(url);
+		var cc = objOCX.PlayVoice(nType,url);
+		alert(cc);
+	}
+	function StopVoice(nType){
+		var result = objOCX.StopVoice(nType);
+		alert(result);
+	}
+	function StopHistoryMsgVoice(){
+		var result = objOCX.StopHistoryMsgVoice();
+		alert(result);
+	}
+	function UpLoadVoiceMsg(){
+		var localUrl = document.getElementById("UpLoadVoiceMsg1").value;
+		var remoteUrl = "http://221.7.12.35:29014/message/sendConsoleRadio.action";
+		
+		if(localUrl){
+			objOCX.UpLoadVoiceMsg(remoteUrl,localUrl,function(str){
+				logInfo("上传语音文件返回值："+str+"\n");
+			})
+		}
+	}
+</script>
