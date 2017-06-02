@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+		(function(global) {
+			var OCX = global.OCX = {
+				define : function(options) {
+					var clazz = options.constructor || new function() {
+					};
+					clazz.prototype = options;
+
+					if (options.$class) {
+						var gourps = options.$class.split('.'), pkg = global, gourp;
+						for (; gourps.length > 1;) {
+							gourp = gourps.shift();
+							pkg = (pkg[gourp] = (pkg[gourp] || {}));
+							console.log(JSON.stringify(pkg[gourp])+"==="+gourp);
+						}
+						console.log(JSON.stringify(pkg)+"====="+gourps.shift());
+						pkg[gourps.shift()] = clazz;
+					}
+					return clazz;
+				}
+			}
+		})(window);
+
+		//定义一个类
+		OCX.define({
+			//类名
+			$class : 'OCX.Hello.Hey',
+			//构造函数
+			constructor : function(name) {
+				this.name = name;
+			},
+			//方法
+			method1 : function() {
+				return 'hello ' + this.name;
+			},
+			method2 : function() {
+				var str = this.method1();
+				alert(str);
+			}
+		})
+
+		//new
+		var hello = new OCX.Hello.Hey('World');
+
+		//调用方法
+		hello.method2();
+	</script>
+</body>
+</html>

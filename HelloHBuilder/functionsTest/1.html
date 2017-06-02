@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+		(function() {
+
+			var Class = {
+				ns : function(packages) {
+					var gourps = packages.split('.'), pkg = window;
+					for (; gourp = gourps.shift();) {
+						pkg = (pkg[gourp] = (pkg[gourp] || {}));
+					}
+				},
+				define : function(options) {
+					var clazz = options.constructor || new function() {
+					};
+					clazz.prototype = options;
+					return clazz;
+				}
+			}
+			Class.ns('OCX.hello')
+
+			OCX.hello.Hello = Class.define({
+				constructor : function(name) {
+					this.name = name;
+				},
+				method1 : function() {
+					return 'hello ' + this.name;
+				},
+				method2 : function() {
+					var str = this.method1();
+					alert(str);
+				}
+			})
+
+		})();
+		var hello = new OCX.hello.Hello('萍子');
+
+		hello.method2()
+	</script>
+</body>
+</html>
