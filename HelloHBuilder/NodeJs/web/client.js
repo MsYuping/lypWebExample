@@ -2,7 +2,7 @@ var http = require('http');
 
 var options = {
 	host:'localhost',
-	port:'8081',
+	port:'1982',
 	path:'/index.html'
 };
 
@@ -20,3 +20,5 @@ var callback = function(response){
 
 var req = http.request(options,callback);
 req.end();
+
+console.log("client«Î«ÛÕÍ±œ");
