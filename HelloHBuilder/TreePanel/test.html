@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			Array.prototype.testArg = "test";
+            function funcArg() {    
+            	alert(funcArg.arguments.testArg);
+                alert(funcArg.arguments[0]);
+            }
+ 
+            alert(new Array().testArg); // result: "test"
+            funcArg.apply(null,['a':a,'b':b,'c':c]);
+		</script>
+	</body>
+
+</html>

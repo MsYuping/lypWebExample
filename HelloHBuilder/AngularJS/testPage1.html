@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app>
+    <head>
+        <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+    </head>
+    <body>
+        Your name: <input type="text" ng-model="yourname" placeholder="World">
+        <hr>
+        Hello {{yourname || 'World'}}!
+        
+        <ul>
+    <li>
+        <span>Nexus S</span>
+        <p>
+        Fast just got faster with Nexus S.
+        </p>
+    </li>
+    <li>
+        <span>Motorola XOOM™ with Wi-Fi</span>
+        <p>
+        The Next, Next Generation tablet.
+        </p>
+    </li>
+</ul>
+
+<table>
+    <tr><th>row number</th></tr>
+    <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td style="border:1px solid red;">{{i+1}}</td></tr>
+</table>
+    </body>
+</html>
