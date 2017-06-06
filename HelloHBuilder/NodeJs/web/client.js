@@ -1,3 +1,4 @@
+//注意有可能会出现端口占用的情况，使用命令查看端口是否已经被占用
 var http = require('http');
 
 var options = {
@@ -21,4 +22,4 @@ var callback = function(response){
 var req = http.request(options,callback);
 req.end();
 
-console.log("client�������");
+console.log("client�������");
