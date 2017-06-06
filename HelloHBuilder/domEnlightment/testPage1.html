@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件冒泡</title>
+	</head>
+	<body onclick="bodyEvent()">
+		<table onclick="editCell()" id="table1" border="" cellspacing="" cellpadding="">
+			<tr><th>Header</th></tr>
+			<tr><td cc="dd">Data</td></tr>
+		</table>
+		<ul>
+		
+		</ul>
+		<div id="AA"></div>
+		<script>
+		
+		document.getElementById('AA').innerHTML = "ddddddd";
+		function bodyEvent(e){
+			e=e || window.event;
+			var target = e.target || e.srcElement;
+			var tagName = target.tagName.toLowerCase();
+			alert("bodyEvent="+tagName);
+		}
+			function getEventTarget(e){
+				e=e||window.event;
+				return e.target || e.srcElement;
+			}
+			
+			function editCell(e){
+				var target = getEventTarget(e);
+				if(target.tagName.toLowerCase()==='td'){
+					//This is the TD CELL;
+					alert(target.getAttribute("cc"));
+					alert('td');
+				}else if(target.tagName.toLowerCase()==='th'){
+					alert('th');
+				}
+			}
+			
+//			var oTable = document.getElementById('table1');
+//			oTable.attachEvent("onclick",editCell());
+		</script>
+	</body>
+</html>

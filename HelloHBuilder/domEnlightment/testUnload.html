@@ -1,0 +1,32 @@
+<html>
+<head>
+</head>
+
+<body link="#0000CC" vlink="#0000CC" alink="#0000CC">
+<div class="video" id="CuPlayer">
+<script>
+  window.onbeforeunload = function closeVideo(){
+  
+      var obj = document.getElementById("playerId");
+	  if(obj){
+		 obj.pause(); 
+         //obj.currentTime = 0.0; 
+	  }
+  }
+
+</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td align='center'>
+			<b>file: c88683295_1450949972644.mp4</b>
+		</td>
+	</tr>
+	<tr>
+		<td align='center'>
+		<audio id="playerId" src="http://221.7.12.35:8080/recordings/b90001035_2015-12-21-16-01-00.mp4" autostart="true" width="300" height="300" name="sound_c88683295_1450949972644.mp4" enablejavascript="true">
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

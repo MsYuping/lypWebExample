@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>DOM Enlightenment</title>
+	</head>
+
+	<body>
+		<div id="div1" class="visible"></div>
+
+		<script>
+			//toggle 使用，切换，
+				var elm1 = document.getElementById("div1");
+				elm1.classList.toggle("visible");
+				elm1.classList.toggle("brown");
+				console.log(elm1.className);
+		</script>
+
+		<div id="div2" class="big brown bear"></div>
+		<script>
+			//元素是否引用某个样式
+			   var elm2 = document.getElementById("div2");
+			   console.log(elm2.className);//String 类型, .split(" ")可以拆分成array类型
+			   console.log(elm2.classList);// 类型DOMTokenList
+			   console.log(elm2.classList.contains("brown"));
+			   console.log(elm2.classList.contains("aa"));
+			   console.log(elm2.className.indexOf("brown"));//string截取字符串判读是否有样式
+		</script>
+		<div id="div3" data-foo-foo="foo" data-bar-bar="bar">AAAAAAA</div>
+		<script>
+			//dataset属性使用,出现大写前面加-，例如：gooGoo对应data-goo-goo;googoo对应data-googoo
+//dataset contains camel case versions of data attributes. Meaning data-foo-foo will be listed as the property fooFoo in
+//the dataset DOMStringMap object. The- is replaced by camel casing.
+			var elm3= document.getElementById("div3");
+			//get
+			console.log(elm3.dataset.fooFoo);
+			console.log(elm3.dataset.barBar);
+		    //set
+		    elm3.dataset.gooGoo='goo';
+		    console.log(elm3.dataset)
+		    for(var key in elm3.dataset){//遍历输出map类型的值
+		    	console.log(elm3.dataset[key]);
+		    }
+		    console.log(elm3.outerHTML);
+		    delete elm3.dataset.fooFoo;//删除dataset属性
+		    console.log(elm3.outerHTML);
+		    
+		    console.log(elm3.getAttribute("data-bar-bar"));
+		    console.log(elm3.textContent);
+		    
+		</script>
+		    <ul>
+		 		<li class="liClass">Hello</li>
+				<li class="liClass">big</li>
+				<li class="liClass">bad</li>
+				<li class="liClass">world</li>
+            </ul>
+            
+        <script>
+        
+        //querySelectorAll方法属于静态方法，动态加入li元素后，dom不变；
+        //getElementsByTagName&getElementsByClassName方法属于动态方法，冬天加入li元素后，dom如果有改变，值也会改变；
+        //下面三个方法都适用于单个dom对象中的查找，不局限与document对象
+        	var list1=document.querySelectorAll('li');
+        	var list2=document.getElementsByTagName('li');
+        	var list3=document.getElementsByClassName('liClass');
+        	console.log(list1.length);//4
+			console.log(list2.length);//4
+			console.log(list3.length);//4
+        	var nodeLI = document.createElement("li");
+        	nodeLI.setAttribute("class","liClass");
+        	nodeLI.innerHTML="!!!!";
+        	document.querySelector("ul").appendChild(nodeLI);
+        	console.log(list1+"-"+list1.length);//4  static方法保存的变量
+			console.log(list2+"-"+list2.length);//5
+			console.log(list3+"-"+list3.length);//5
+        	
+        </script>
+        
+        
+        <script>
+            console.log(document.scripts);
+        	console.log(document.styleSheets);
+        	
+        </script>
+	</body>
+
+</html>

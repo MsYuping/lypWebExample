@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link id="linkElement" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css" rel="stylesheet" type="text/css">
+		<style id="styleElement">
+			body {
+				background-color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<script>
+			console.log(document.styleSheets.length); //logs 2
+			console.log(document.styleSheets[0]); // the <link>
+			console.log(document.styleSheets[1]); // the <style>
+			
+			
+			console.log(document.querySelector('#linkElement').sheet);
+			console.log(document.querySelector('#styleElement').sheet)
+		</script>
+	</body>
+
+</html>

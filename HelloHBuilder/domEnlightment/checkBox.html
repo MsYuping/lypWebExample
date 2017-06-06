@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="checkbox" userid="1" onclick="ckc(this)"/>1<br />
+		<input type="checkbox" userid="2" onclick="ckc(this)" />2<br />
+		<input type="checkbox" userid="4" onclick="ckc(this)" />4<br />
+		<input type="checkbox" userid="3" onclick="ckc(this)" />3<br />
+		<input type="checkbox" userid="5" onchange="ckc(this)" />5<br />
+		<input type="checkbox" userid="6" onchange="ckc(this)" />6<br />
+		<input type="checkbox" userid="7" onchange="ckc(this)" />7<br />
+		<input type="checkbox" userid="8" onchange="ckc(this)" />8<br />
+		<script>
+			function ckc(obj){
+				alert(obj.checked);
+				
+			}
+			
+		</script>
+	</body>
+</html>

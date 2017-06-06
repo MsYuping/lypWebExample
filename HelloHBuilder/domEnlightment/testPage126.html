@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<body>
+		<a href="google.com">no go</a>
+		<br />
+		<input type="checkbox" />
+		<br />
+		<textarea></textarea>
+		<br />
+		<div>click me!</div>
+		<script>
+			//取消浏览器一些默认的事件
+			document.querySelector('a').addEventListener('click', function(event) {
+				event.preventDefault(); //stop the default event for <a> which would be to load a url
+				console.log("a");
+			}, false);
+			document.querySelector('input').addEventListener('click', function(event) {
+				event.preventDefault(); //stop default event for checkbox, which would be to toggle checkbox state
+				event.stopPropagation();
+				console.log("input");
+			}, false);
+			document.querySelector('textarea').addEventListener('click', function(event) {
+				event.preventDefault(); //stop default event for textarea, which would be to add characters typed
+				console.log("textarea");
+			}, false);
+			/*keep in mind that events still propagate, clicking the link in this html document will stop the default event but not event bubbling*/
+			document.body.addEventListener('click', function() {
+				console.log('the event flow still flows!');
+			}, false);
+			//=============================================================================
+			//first event attached
+			document.querySelector('div').addEventListener('click', function() {
+				console.log('I get invoked because I was attached first');
+			}, false);
+			//seond event attached
+			document.querySelector('div').addEventListener('click', function(event) {
+				console.log('I get invoked, but stop any other click events on this target');
+				event.stopImmediatePropagation();//在此事件上停止，但是当前事件依旧执行，以事件为基准
+                //event.stopPropagation();//此元素上停止事件，但是此元素上的事件依旧执行，以元素为基准
+			}, false);
+			//third event attached, but because stopImmediatePropagation() was called above this event does not get invoked
+			document.querySelector('div').addEventListener('click', function() {
+				console.log('I get stopped from the previous click event listener');
+			}, false);
+			//notice that the event flow is also cancelled as if stopPropagation was called too
+			document.body.addEventListener('click', function() {
+				console.log('What, denied from being invoked!');
+			}, false);
+		</script>
+	</body>
+
+</html>

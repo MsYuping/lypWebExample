@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		
+          .left{ width:1000px; height:1000px; background:#000000; float:left ;overflow:show; background:red;position:absolute;}
+		 .childDiv{width:33.3%;border: 0.01px solid  #c1c1c1;height: 33.33% ;float:left; background-color: yellow;} 
+		</style>
+	</head>
+	<body>
+		<div class="left"  id="showVideoContainer">
+
+     
+        </div>
+        
+        
+		<script>
+		var num = 36;
+		
+		var divnum = Math.pow(num,2);
+        var currentDivNumber=divnum;
+       
+        var  widthRate =parseFloat(100/num)-0.1;
+        var  heightRate=parseFloat(100/num)-0.1;
+		var docFragment = document.createDocumentFragment();
+		var leftDiv = document.createElement("div");
+			for(var i=0;i<100;i++){
+				leftDiv.innerHTML+="<div id ='voipvideo"+i+"' class='childDiv' userId= '' videoState= 'novideo' voipvideonum= '"+i+"'  style='width:100px;height:100px;float:left;'><object id='CPTTActivexVideoCtrl1' classid='clsid:6c9b9e09-d8c4-4631-a1c2-a4e0e2b45c72' style='width :99.3%; height:99.3%'> </object></div>";
+			    
+			    
+			}
+		docFragment.appendChild(leftDiv);
+		document.querySelector("div").appendChild(docFragment);
+		</script> 
+	</body>
+</html>

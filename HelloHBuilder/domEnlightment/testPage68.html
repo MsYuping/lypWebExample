@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<style>
+			div {
+				height: 30px;
+				width: 30px;
+				overflow: auto;
+			}
+			
+			p {
+				background-color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<p>1</p>
+			<p>2</p>
+			<p>3</p>
+			<p>4</p>
+			<p>5</p>
+			<p>6</p>
+			<p>7</p>
+			<p>8</p>
+			<p>9</p>
+			<p>10</p>
+		</div>
+		<script>
+			//select <p>5</p> and scroll that element into view, I pass children '4' because its a zero index array-like structure
+			document.querySelector('div').children[4].scrollIntoView(true);
+		</script>
+		<p id="p1">Go big Blue Blue</p>
+		<script>
+			var pElementText = document.querySelector('#p1').firstChild;
+			console.log(pElementText.data);
+			//add !
+			pElementText.appendData('!');
+			console.log(pElementText.data);
+			//remove first 'Blue'
+			pElementText.deleteData(7, 5);
+			console.log(pElementText.data);
+			//insert it back 'Blue'
+			pElementText.insertData(7, 'Blue ');
+			console.log(pElementText.data);
+			//replace first 'Blue' with 'Bunny'
+			pElementText.replaceData(7, 5, 'Bunny ');
+			console.log(pElementText.data);
+			//extract substring 'Blue Bunny'
+			console.log(pElementText.substringData(7, 10));
+		</script>
+	</body>
+
+</html>
