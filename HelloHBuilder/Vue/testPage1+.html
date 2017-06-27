@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="warp">
+		<p>{{ value }}</p>
+		<input type="text" v-model="value">
+	</div>
+	<script>
+		var vue = new Vue({
+			el : '#warp',
+			data : {
+				value : 'Hello!'
+			}
+		});
+		
+		setTimeout(function(){
+			vue.value = 'fuck2';
+		},2000)
+		
+	</script>
+    
+ 
+
+</body>
+</html>

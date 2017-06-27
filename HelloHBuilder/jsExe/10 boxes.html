@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>选项卡</title>
+</head>
+<body>
+</body>
+
+<script>
+function createBox(){
+  document.body.innerHTML = "";
+  var wWidth = document.documentElement.clientWidth || document.body.clientWidth;
+  var wHeight = document.documentElement.clientHeight || document.body.clientHeight;
+  
+  var nDivWidth = wWidth/10;
+  var nDivHeight = wHeight/10;
+  var oFrag = document.createDocumentFragment();//(创建文档碎片)不大懂。。。。。。。
+  for(var row = 0;row<10;row++){
+     for(var col=0;col<10;col++){
+	    var oDiv = document.createElement('div');
+		oDiv.style.height=nDivHeight+"px";
+		oDiv.style.width = nDivWidth+"px";
+		oDiv.style.left = nDivWidth*col+"px";
+		oDiv.style.top = nDivHeight*row+"px";
+		oDiv.style.position="absolute";
+		//随机生成RGB颜色
+		oDiv.style.background = "RGB("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")";
+		//oDiv.innerHTML = nDivWidth*col+"=="+nDivHeight*row;
+		//把每次创建的div追加给文档碎片
+		oFrag.appendChild(oDiv);
+	 }
+  }
+  //最后一次性把文档碎片追加到body中，浏览器只渲染一次，提高性能
+  document.body.appendChild(oFrag);
+    
+}
+  
+  function changeColor(){
+    document.getElementsByTagName('div').item(Math.floor(Math.random()*100)).style.background = "RGB("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")";
+  }
+  
+  window.onload = function(){
+    createBox();
+	window.setInterval(changeColor,2000);
+  };
+ // window.onresize = createBox;
+
+</script>
+</html>

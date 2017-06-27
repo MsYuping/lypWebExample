@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>选项卡</title>
+<style type="text/css">
+  #tab{
+   width:382px;
+   margin:100px auto;
+  }
+  #tab ul{
+  padding:0;
+  margin:0 auto;
+  list-style:none;
+  margin-left:10px;
+  }
+  #tab li{
+  cursor:pointer;
+  margin:0;
+  float:left;
+  margin-right:15px;
+  padding:5px 10px;
+  line-height:1.5em;
+  background:#9CF;
+  border:#60F solid 1px;
+  font-size:12px;
+  position:relative;
+  top:1px;
+  left:6px;
+  }
+  #tab div{
+  clear:both;
+  background:#CFF;
+  height:200px;
+  border:#60F solid 1px;
+  display:none;
+  text-align:center;  
+   }
+   #tab dic.content{
+   clear:both;
+   background:#CFF;
+   height:200px;
+   border:60F solid 1px;
+   display:none;}
+  #tab .selectedLi{
+  background:#CFF;
+  border-bottom-color:#CFF;
+  }
+  #tab .selectedDiv{
+  display:block;}
+
+</style>
+</head>
+<body>
+<div id="tab">
+  <ul>
+     <li class="selectedLi">选项一</li>
+	 <li>选项二</li>
+	 <li>选项三</li>
+	 <li>选项四</li>
+	 <li>选项五</li>
+  </ul>
+    <div class="selectedDiv">对应选项一A</div>
+    <div>对应选项二B</div>
+	<div>对应选项三C</div>
+	<div>对应选项四D</div>
+	<div>对应选项五E</div>
+</div>
+<script>
+ function changeTab(nIndex){
+ 
+     var oTab = document.getElementById('tab');
+	 var oLis = oTab.getElementsByTagName('li');
+	 var oDivs = oTab.getElementsByTagName('div');
+	 for(var i=0,len=oLis.length;i<len;i++){
+	    oLis[i].className = null;
+		oDivs[i].className=null;
+	 }
+	 oLis[nIndex].className = 'selectedLi';
+	 oDivs[nIndex].className = 'selectedDiv';
+ }
+ window.onload = function(){
+     var oTab = document.getElementById('tab');
+	 var oLis = oTab.getElementsByTagName('li');
+	 for(var i=0,len=oLis.length;i<len;i++){
+	       oLis[i].index = i;
+	       oLis[i].onclick = function(){
+		   changeTab(this.index);
+		}
+	 }
+	 /*
+	  oLis[0].onclick = function(){changeTab(0)};
+	 oLis[1].onclick = function(){changeTab(1)};
+	 oLis[2].onclick = function(){changeTab(2)};
+	 oLis[3].onclick = function(){changeTab(3)};
+	 oLis[4].onclick = function(){changeTab(4)};
+	 */
+	 
+ }
+</script>
+</body>
+</html>

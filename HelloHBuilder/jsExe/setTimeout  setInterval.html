@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>倒计时计算方法</title>
+</head>
+<body>
+<style type="text/css">
+ #div1{
+ width:500px;
+ font-weight:bold;
+ font-size:24px;
+ margin:0 auto;
+ height:2em;
+ background:#99c; 
+ };
+</style>
+
+<div id="div1"></div>
+</body>
+<script type="text/javascript">
+var timer = null;
+function clock(){
+  var t = new Date();
+  var year = t.getFullYear();
+  var month = t.getMonth()+1;
+  var day = t.getDate();
+  var hour = t.getHours();
+  var minute = t.getMinutes();
+  var second = t.getSeconds();
+  var ms = t.getMilliseconds();
+  var week = t.getDay();
+  switch(week){
+    case 0:
+	  week ='日';
+	  break;
+	case 1:
+	  week ='一';
+	  break;
+	case 2:
+	  week ='二';
+	  break;    
+	case 3:
+	  week ='三';
+	  break;    
+	case 4:
+	  week ='四';
+	  break;   
+    case 5:
+	  week ='五';
+	  break;    
+	case 6:
+	  week ='六';
+	  break;
+  }
+  var sCurrentTime = year+"年"+month+"月"+day+"日"+hour+"时"+minute+"分"+second+"秒"+ms+"毫秒"+"星期"+week;
+  
+  var oDiv = document.getElementById("div1");
+  oDiv.innerHTML = sCurrentTime;
+  timer = window.setTimeout(clock,1000);
+  oDiv.innerHTML += ";timer:"+timer;
+}
+function toggleClock(){
+  if(timer){
+    window.clearTimeout(timer);
+	timer = null;
+  }else{
+    clock();
+  }
+}
+var oDiv = document.getElementById("div1");
+oDiv.onclick = toggleClock;
+window.onload = function(){
+  clock();
+}
+</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var data = {
+			value : 0
+		}
+
+		var $watch = function() {
+			alert(';你改变了数据');
+		}
+		var defineProperty = function(data) {
+			for ( var k in data) {
+				(function(v) {
+					Object.defineProperty(data, k, {
+						set : function(newValue) {
+							v !== newValue && $watch();
+							v = newValue;
+						},
+						get : function() {
+							return v;
+						}
+					})
+				})(data[k]);
+			}
+		}
+		defineProperty(data);
+
+		data.value = 12;
+
+		alert(data.value);
+	</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>正则表达式test</title>
+</head>
+<body>
+<script>
+var reg = /o{2}/g;//g表示多次查找
+var str = 'money';
+alert(reg.exec(str));
+
+str= 'good food';
+alert(str.match(reg));
+
+var reg1 = /c{1,}?/;//?表示非贪婪匹配即尽量少量匹配字符
+str = 'ccccc';
+alert(reg1.exec(str));
+
+reg = /^g.e$/;
+str = 'good morning , everyone';
+alert(reg.test(str));
+
+
+alert(Math.PI);
+
+</script>
+</body>
+</html>
